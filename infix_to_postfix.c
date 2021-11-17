@@ -1,4 +1,6 @@
 #include<stdio.h>
+#include<iostream>
+using namespace std;
 #include<string.h>
 
 int top=-1;
@@ -39,33 +41,45 @@ j++;
 }
 else
 {
-//&& (arr[top]!='{' || arr[top]!='}')
-if((s[i]=='+' || s[i]=='-') && top!=-1 && arr[top]!='(')
+if((s[i]=='+' || s[i]=='-') && top!=-1)
 {
-	while(top!=-1 &&arr[top]!=)
-	{
-	char k = pop();
-	s1[j]=k;
-	j++;
-	}
-	pop();
-	push(s[i]);
-}
-else if(s[i]==')')
-{
-	while(arr[top]!='(')
+	while(top!=-1 && arr[top]!='(')
 	{
 	s1[j]=pop();
+    //cout<<arr[top];
+	j++;
+	}
+	push(s[i]);
+}
+
+else if(s[i]=='^')
+{
+    while(top!=-1 && arr[top]!='(' && arr[top]=='^')
+	{
+	s1[j]=pop();
+    //cout<<arr[top];
+	j++;
+	}
+	push(s[i]);
+}
+
+else if(s[i]==')')
+{
+	while(top!=-1 && arr[top]!='(')
+	{
+	s1[j]=pop();
+    //cout<<arr[top];
 	j++;
 	}
 	pop();
 }
+
 else if(s[i]=='*' || s[i]=='/')
 {
 	while(top!=-1 && arr[top]!='+' && arr[top]!='-' && arr[top]!='(')
 	{
-	char k = pop();
-	s1[j]=k;
+	s1[j]=pop();
+    //cout<<s1[j];
 	j++;
 	}
 	if(arr[top]=='(')
@@ -73,15 +87,19 @@ else if(s[i]=='*' || s[i]=='/')
 	push(s[i]);
 }
 else
+{
 push(s[i]);
+}
 }
 }
 while(top!=-1)
 {
+//cout<<arr[top];
 s1[j]=arr[top];
 j++;
 pop();
 }
+s1[j]='\0';
 printf("%s",s1);
 return 0;
 }

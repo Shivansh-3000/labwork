@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void func()
+{
+    int n,m,cou = 0;
+    cin>>n>>m;
+     vector<vector<char>> vec( n , vector<char> (m)); 
+     vector<int>rec;char ch;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            cin>>v[i][j];
+        }
+    }
+    vector<queue<int>> v1;
+    for(int j=0;j<m;j++)
+    {
+        int count = 0;queue<int>k;cou =0;
+        for(int i=n-1;i>=0;i--)
+        {
+            if(vec[i][j]=='o')
+            {
+                cou++;
+                k.insert(count);
+                count = 0;
+            }
+            else if(vec[i][j]=='*')
+            {
+                count++;
+            }
+        }rec.push_back(cou);
+        v1.push_back(k);
+    }
+    vector<vector<char>> vec2( n , vector<char> (m)); 
+    int c=0,fl = 0;
+    for(int j=0;j<m;j++)
+    {
+        int kee = v[j].front();
+        v[j].pop();
+        int si = v[j].size();
+        int w = 0;
+        if(si == rec[j])
+        {
+            for(int i=n-1;i<=0;i++)
+            {
+                if(vec[i][j]=='o')
+                {
+                    vec2[i][j] = 'o';
+                    w = 1;
+                }
+                if(w==1 && kee>0)
+                {
+                    vec2[i][j] = '*';
+                    k--;
+                }
+                if(kee==0)
+                {
+                    w = 0;kee = v[j].front();
+                    v[j].pop();
+                }
+            }
+        }
+        else
+        {
+            
+        }
+    }
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        func();
+    }
+}

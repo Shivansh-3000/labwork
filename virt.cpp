@@ -1,72 +1,67 @@
-#include<iostream>
-#include<cstring>
-#include<stdlib.h>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
 
-class Student{
-protected:
-string name;
-public:
-void getname(string n)
+typedef struct 
 {
-name =n;
-}
-void putname()
-{
-cout<<"Name is "<<name;
-}
-};
+    int at;
+    int bt;
+    int ct;
+    int tat;
+    int wt;
+    int rt;
+} data;
 
-class Test:public virtual Student{
-protected:
-int m,n;
-public:
-void getmarks(int a,int b)
+int compare (const void * a, const void * b)
 {
-m=a;
-n=b;
+  data *data_1 = (data *)a;
+  data *data_2 = (data *)b;
+  if( data_1->at == data_2->at)
+  {
+      return data_1->at - data_2->at;
+  }
+  else if( data_1->at < data_2->at)
+    return -1;
+  else
+    return 1;
 }
-void putmarks()
-{
-cout<<"\nMarks in first subject is :"<<m;
-cout<<"\nMarks in second subject are :"<<n;
-}
-};
 
-class sports:public virtual Student{
-protected:
-int sp;
-public:
-void get_sp(int s)
+int main ()
 {
-sp = s;
-}
-void put_sp()
-{
-cout<<"\nMarks in sports are :"<<sp;
-}
-};
-
-class result:public Test,public sports{
-protected:
-int marks;
-public:
-void display()
-{
-marks = m+n+sp;
-putname();
-putmarks();
-put_sp();
-cout<<"\nMarks in total are :"<<marks;
-}
-};
-
-int main()
-{
-result obj;
-obj.getname("Shivansh");
-obj.getmarks(90,99);
-obj.get_sp(95);
-obj.display();
-return 0;
+    int i = 0, num = 5;
+    data arr[num];
+    for(i=0; i < num; i++)
+    { 
+        int a,b;
+        scanf("%d",&a);
+        scanf("%d",&b);
+        arr[i].at = a;
+        arr[i].bt = b;    
+    }
+    qsort (arr, num, sizeof(data), compare);
+    arr[0].ct = arr[0].at+arr[0].bt;
+    arr[0].tat = arr[0].ct - arr[0].at;
+    arr[0].wt = arr[0].tat - arr[0].bt;
+    arr[0].rt = arr[0].wt + arr[0].at;
+    
+    for(int i=1;i<num;i++)
+    {
+        int aagya;
+        if(arr[i-1].ct > arr[i].at)
+        {
+            aagya = arr[i-1].ct ;
+        }
+        else
+        {
+            aagya = arr[i].at;
+        }
+    arr[i].ct = aagya+arr[i].bt;
+    arr[i].tat = arr[i].ct - arr[i].at;
+    arr[i].wt = arr[i].tat - arr[i].bt;
+    arr[i].rt = arr[i].wt + arr[i].at;
+    }
+    for(int i=0;i<num;i++)
+    {
+        printf("%d %d %d %d %d %d\n",arr[i].at,arr[i].bt,arr[i].ct,arr[i].tat,arr[i].wt,arr[i].rt);
+    }
+    return 0;
 }

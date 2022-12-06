@@ -1,51 +1,47 @@
-#include<iostream>
-#include<cstring>
+#include <iostream>
 using namespace std;
 
-class stu{
-string name;
-long id;int sub[6];
-public:
-void getdata();
-void result();
-};
-
-void stu::getdata()
+bool ser(int arr[],int v,int n)
 {
-cout<<"Enter the name of the student :";
-getline(cin,name);
-cout<<"Enter the student id :";
-cin>>id;
-cout<<"Enter the marks of the student in 5 subjects \n";
-for(int i=0;i<5;i++)
-cin>>sub[i];
-}
-
-void stu::result()
-{
-cout<<"Name of the student is :"<<name;
-float avg=0;int flag=1;
-cout<<"\nId :"<<id;
-for(int i=0;i<5;i++)
-{
-avg+=sub[i];
-if(sub[i]<35)
-flag=0;
-}
-avg = avg/6.0;
-cout<<"\nAverage marks of the student is :"<<avg;
-if(flag)
-cout<<"\nStudent is Pass";
-else
-cout<<"Student is Fail";
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]==v)
+        return 1;
+    }
+    return 0;
 }
 
 int main()
 {
-stu obj;
-obj.getdata();
-obj.result();
-return 0;
+    int n;
+    printf("Enter the size : ");
+    scanf("%d",&n);
+    int ans[n];
+    printf("Enter the number of pages : ");
+    int m,v,ptr=0,c=0;
+    scanf("%d",&m);
+    for(int i=0;i<m;i++)
+    {
+        scanf("%d",&v);
+        if(i<n)
+        {
+            ans[i] = v;
+        }
+        else
+        {
+            if(ser(ans,v,n))
+            {
+                c++;
+            }
+            else
+            {
+                ans[ptr%n] = v;
+                ptr++;
+            }
+        }
+    }
+    printf("%d",(m-c));
+    return 0;
 }
 
 
